@@ -1,253 +1,245 @@
 import React, { useState } from "react";
+import "./App.css";
 
-const ProductDetailPage = () => {
-  const [quantity, setQuantity] = useState(1);
+const App = () => {
+  const [activeFilter, setActiveFilter] = useState("");
 
-  const handleQuantityChange = (event) => {
-    setQuantity(event.target.value);
+  const toggleFilter = (filterName) => {
+    setActiveFilter((prev) => (prev === filterName ? "" : filterName));
   };
 
+  const products = [
+    { id: 1, name: "Female Pant", category: "T-Shirts", price: 299, img: "https://littleboxindia.com/cdn/shop/products/9ecba9a1665fc879773c3c59b5e3f70e_2dd69582-4211-4a3c-af89-2128ae0c3907.jpg?v=1692199580", gender: "Female", age: "22 - 25" },
+    { id: 2, name: "Female Fromal set", category: "Tops", price: 599, img: "https://littleboxindia.com/cdn/shop/products/37befaedf9b508e3813a96d91f32758c.jpg?v=1692779728", gender: "Female", age: "22 - 25" },
+    { id: 3, name: "Female Shirt", category: "Jeans", price: 1299.99, img: "https://rukminim2.flixcart.com/image/850/1000/xif0q/shirt/c/b/l/s-3015cyan-english-navy-original-imags9p2rpz24ugk.jpeg?q=20&crop=false", gender: "Female", age: "22 - 25" },
+    { id: 4, name: "Female Blazer", category: "Jeans", price: 999.99, img: "https://cdn-ilbjpoh.nitrocdn.com/irqMNmbANnWKDLjAhhyiXtOeVUdvvZsh/assets/images/optimized/rev-d7c5172/www.houseoftailors.ae/images/women/suit/formal/women-formal-1.png", gender: "Female", age: "22 - 25" },
+    { id: 5, name: "Female Pant", category: "T-Shirts", price: 399, img: "https://littleboxindia.com/cdn/shop/products/b0eb3f6a0c073484b7f11bb3f5aa1d5a_900x.jpg?v=1692199580", gender: "Female", age: "22 - 25" },
+    { id: 6, name: "Female Shirt", category: "Tops", price: 999.99, img: "https://www.hancockfashion.com/cdn/shop/files/16116BlackS_5_1800x1800.jpg?v=1690526591", gender: "Female", age: "22 - 25" },
+    { id: 4, name: "Female Blazer", category: "Jeans", price: 999.99, img: "https://cdn-ilbjpoh.nitrocdn.com/irqMNmbANnWKDLjAhhyiXtOeVUdvvZsh/assets/images/optimized/rev-d7c5172/www.houseoftailors.ae/images/women/suit/formal/women-formal-1.png", gender: "Female", age: "22 - 25" },
+    { id: 5, name: "Female Pant", category: "T-Shirts", price: 399, img: "https://littleboxindia.com/cdn/shop/products/b0eb3f6a0c073484b7f11bb3f5aa1d5a_900x.jpg?v=1692199580", gender: "Female", age: "22 - 25" },
+    { id: 6, name: "Female Shirt", category: "Tops", price: 999.99, img: "https://www.hancockfashion.com/cdn/shop/files/16116BlackS_5_1800x1800.jpg?v=1690526591", gender: "Female", age: "22 - 25" },
+  ];
+
+  const brands = [
+    { id: 1, name: "Levi's", img: "https://cdn.gyftr.com/indusindmore/brands/banner/levis.png" },
+    { id: 2, name: "Puma", img: "https://upload.wikimedia.org/wikipedia/en/d/da/Puma_complete_logo.svg" },
+    { id: 3, name: "Adidas", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxlh-TMpLiCdf4aGSZt2lA_Y8JX1hgAadjSw&s" },
+    { id: 4, name: "H&M", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAobukVf4Ewkw2YW_rvgWuUJ8M7H-EynYJXw&s" },
+    { id: 1, name: "Levi's", img: "https://cdn.gyftr.com/indusindmore/brands/banner/levis.png" },
+    { id: 2, name: "Puma", img: "https://upload.wikimedia.org/wikipedia/en/d/da/Puma_complete_logo.svg" },
+    { id: 3, name: "Adidas", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxlh-TMpLiCdf4aGSZt2lA_Y8JX1hgAadjSw&s" },
+  ];
+
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="app-container">
       {/* Header */}
-      <header
-        className="bg-gradient-to-r from-[#5b9eb6] to-[#73C1DE] shadow-md"
-        style={{
-          backgroundColor: "linear-gradient(to right, #5b9eb6, #73C1DE)",
-        }}
-      >
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          {/* Logo */}
-          <h1 className="text-3xl font-bold text-white">StarFashion</h1>
-
-          {/* Navigation Links */}
-          <nav className="flex space-x-8">
-            <a href="/" className="text-white hover:text-blue-500">
-              Home
-            </a>
-            <a href="/products" className="text-white hover:text-blue-500">
-              Products
-            </a>
-            <a href="/contact-us" className="text-white hover:text-blue-500">
-              Contact Us
-            </a>
-          </nav>
-
-          {/* Sign Up Button */}
-          <div>
-            <button className="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
-              Sign Up
-            </button>
-          </div>
+      <header className="header">
+        <div className="logo">StarFashion</div>
+        <nav className="nav-links">
+          <a href="/">Home</a>
+          <a href="/products">Products</a>
+          <a href="/contact">Contact Us</a>
+        </nav>
+        <div className="header-actions">
+          <input type="text" className="search-bar" placeholder="Search products..." />
+          <button className="cart-btn">Cart</button>
+          <button className="signup-btn">Sign Up</button>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8 flex-grow">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Product Image */}
-          <div className="relative">
-            <img
-              src="10.jpeg"
-              alt="Women's Lehenga"
-              className="rounded-lg mx-auto w-80 h-auto"
-            />
-            <div className="absolute inset-0 flex justify-between items-center px-4">
-              <button className="bg-gray-800 text-white rounded-full p-2">❮</button>
-              <button className="bg-gray-800 text-white rounded-full p-2">❯</button>
-            </div>
-          </div>
-
-          {/* Product Details */}
-          <div>
-            <h2 className="text-3xl font-semibold text-gray-800">
-              Elegant Lehenga
-            </h2>
-            <p className="text-xl text-blue-700 font-bold mt-2">₹12,000</p>
-            <p className="text-gray-600 mt-2">
-              This lehenga is crafted for modern elegance with traditional charm.
-              Perfect for weddings, receptions, and festive occasions.
-            </p>
-
-            {/* Detailed Information */}
-            <div className="mt-4">
-              <h3 className="text-lg font-semibold text-gray-800">
-                Product Highlights:
-              </h3>
-              <ul className="mt-2 text-gray-600 list-disc list-inside">
-                <li>
-                  <strong>Fabric:</strong> Premium silk with a soft, lightweight
-                  feel.
-                </li>
-                <li>
-                  <strong>Embellishments:</strong> Intricate zari embroidery
-                  with hand-stitched sequins.
-                </li>
-                <li>
-                  <strong>Color:</strong> Vibrant red with golden accents.
-                </li>
-                <li>
-                  <strong>Dupatta:</strong> Matching net dupatta with
-                  embroidered border.
-                </li>
-                <li>
-                  <strong>Occasion:</strong> Suitable for weddings, receptions,
-                  or festive gatherings.
-                </li>
-                <li>
-                  <strong>Styling Tip:</strong> Pair with gold jewelry and
-                  embellished heels for a regal look.
-                </li>
-              </ul>
-            </div>
-
-            {/* Ratings */}
-            <div className="mt-4">
-              <p className="text-sm text-gray-600">Customer Ratings</p>
-              <div className="flex justify-center">
-                <span>⭐⭐⭐⭐☆</span>
-              </div>
-            </div>
-
-            {/* Quantity Selection and Add to Cart Buttons */}
-            <div className="mt-4 flex justify-between items-center">
-              <div className="flex items-center space-x-2">
-                <button
-                  className="bg-gray-200 text-gray-600 p-2 rounded"
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                >
-                  -
-                </button>
-                <input
-                  type="number"
-                  value={quantity}
-                  min="1"
-                  onChange={handleQuantityChange}
-                  className="w-16 text-center border border-gray-300 p-2 rounded"
-                />
-                <button
-                  className="bg-gray-200 text-gray-600 p-2 rounded"
-                  onClick={() => setQuantity(quantity + 1)}
-                >
-                  +
-                </button>
-              </div>
-
-              <div className="flex space-x-4">
-                <button className="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-600">
-                  Add to Cart
-                </button>
-                <button className="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-600">
-                  Buy Now
-                </button>
-              </div>
-            </div>
-          </div>
+      <main className="main-content">
+      <aside className="filter">
+  <h3>Filters</h3>
+  <div className="filter-wrapper">
+    {/* Category Filter */}
+    <div className="filter-section">
+      <button className="filter-title" onClick={() => toggleFilter("category")}>
+        Category
+        <span className="filter-icon">{activeFilter === "category" ? "▲" : "▼"}</span>
+      </button>
+      {activeFilter === "category" && (
+        <div className="filter-content">
+          <label>
+            <input type="checkbox" />
+            Jeans
+          </label>
+          <label>
+            <input type="checkbox" />
+            Tops
+          </label>
+          <label>
+            <input type="checkbox" />
+            T-Shirts
+          </label>
         </div>
+      )}
+    </div>
 
-        {/* Suggestions */}
-        <div className="mt-12">
-          <h3 className="text-xl font-semibold text-gray-800 text-center">
-            More Suggestions
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-            <div className="border rounded-lg p-4 text-center">
-              <img
-                src="https://mandirawirk.in/cdn/shop/files/10_a2af37eb-fb35-469d-8253-199c2ca6d6c0.jpg?v=1694153981"
-                alt="Product 1"
-                className="rounded mx-auto w-32 h-32"
-              />
-              <h4 className="mt-2 text-gray-800 font-medium">
-                Embroidered Kurta
-              </h4>
-              <p className="text-blue-700">₹2,499</p>
-              <button className="bg-blue-700 text-white w-full mt-2 px-4 py-2 rounded hover:bg-blue-600">
-                Add to Cart
-              </button>
-            </div>
-            <div className="border rounded-lg p-4 text-center">
-              <img
-                src="https://sunasa.in/cdn/shop/products/IMG_20221019_010024_1500x.jpg?v=1715888401"
-                alt="Product 2"
-                className="rounded mx-auto w-32 h-32"
-              />
-              <h4 className="mt-2 text-gray-800 font-medium">Silk Saree</h4>
-              <p className="text-blue-700">₹7,999</p>
-              <button className="bg-blue-700 text-white w-full mt-2 px-4 py-2 rounded hover:bg-blue-600">
-                Add to Cart
-              </button>
-            </div>
-            <div className="border rounded-lg p-4 text-center">
-              <img
-                src="https://www.mirraclothing.com/wp-content/uploads/2024/06/5-2-1-1.jpg"
-                alt="Product 3"
-                className="rounded mx-auto w-32 h-32"
-              />
-              <h4 className="mt-2 text-gray-800 font-medium">
-                Designer Blouse
-              </h4>
-              <p className="text-blue-700">₹1,999</p>
-              <button className="bg-blue-700 text-white w-full mt-2 px-4 py-2 rounded hover:bg-blue-600">
-                Add to Cart
-              </button>
-            </div>
-          </div>
+    {/* Price Filter */}
+    <div className="filter-section">
+      <button className="filter-title" onClick={() => toggleFilter("price")}>
+        Price
+        <span className="filter-icon">{activeFilter === "price" ? "▲" : "▼"}</span>
+      </button>
+      {activeFilter === "price" && (
+        <div className="filter-content">
+          <label>
+            Min
+            <input type="number" placeholder="Min" className="filter-input" />
+          </label>
+          <label>
+            Max
+            <input type="number" placeholder="Max" className="filter-input" />
+          </label>
         </div>
+      )}
+    </div>
+
+    {/* Gender Filter */}
+    <div className="filter-section">
+      <button className="filter-title" onClick={() => toggleFilter("gender")}>
+        Gender
+        <span className="filter-icon">{activeFilter === "gender" ? "▲" : "▼"}</span>
+      </button>
+      {activeFilter === "gender" && (
+        <div className="filter-content">
+          <label>
+            <input type="radio" name="gender" />
+            Male
+          </label>
+          <label>
+            <input type="radio" name="gender" />
+            Female
+          </label>
+          <label>
+            <input type="radio" name="gender" />
+            Unisex
+          </label>
+        </div>
+      )}
+    </div>
+
+    {/* Age Filter */}
+    <div className="filter-section">
+      <button className="filter-title" onClick={() => toggleFilter("age")}>
+        Age
+        <span className="filter-icon">{activeFilter === "age" ? "▲" : "▼"}</span>
+      </button>
+      {activeFilter === "age" && (
+        <div className="filter-content">
+          <label>
+            <input type="checkbox" />
+            18 - 21
+          </label>
+          <label>
+            <input type="checkbox" />
+            22 - 25
+          </label>
+          <label>
+            <input type="checkbox" />
+            26 - 30
+          </label>
+        </div>
+      )}
+    </div>
+
+    {/* Sort By Filter */}
+    <div className="filter-section">
+      <button className="filter-title" onClick={() => toggleFilter("sort")}>
+        Sort By
+        <span className="filter-icon">{activeFilter === "sort" ? "▲" : "▼"}</span>
+      </button>
+      {activeFilter === "sort" && (
+        <div className="filter-content">
+          <select className="filter-dropdown">
+            <option value="low-to-high">Price: Low to High</option>
+            <option value="high-to-low">Price: High to Low</option>
+            <option value="popularity">Popularity</option>
+            <option value="new-arrivals">New Arrivals</option>
+          </select>
+        </div>
+      )}
+    </div>
+  </div>
+  
+
+{/* Material Filter */}
+<div className="filter-section">
+  <button className="filter-title" onClick={() => toggleFilter("material")}>
+    Material
+    <span className="filter-icon">{activeFilter === "material" ? "▲" : "▼"}</span>
+  </button>
+  {activeFilter === "material" && (
+    <div className="filter-content">
+      <label><input type="checkbox" /> Cotton</label>
+      <label><input type="checkbox" /> Polyester</label>
+      <label><input type="checkbox" /> Silk</label>
+    </div>
+  )}
+</div>
+
+{/* Color Filter */}
+<div className="filter-section">
+  <button className="filter-title" onClick={() => toggleFilter("color")}>
+    Color
+    <span className="filter-icon">{activeFilter === "color" ? "▲" : "▼"}</span>
+  </button>
+  {activeFilter === "color" && (
+    <div className="filter-content">
+      <div className="color-palette">
+        <div className="color-option" style={{ backgroundColor: "#FF5733" }}></div>
+        <div className="color-option" style={{ backgroundColor: "#28A745" }}></div>
+        <div className="color-option" style={{ backgroundColor: "#0056B3" }}></div>
+        <div className="color-option" style={{ backgroundColor: "#FFC107" }}></div>
+      </div>
+    </div>
+  )}
+</div>
+
+
+  {/* Apply and Clear Filters */}
+  <div className="filter-actions">
+    <button className="apply-filters">Apply Filters</button>
+    <button className="clear-filters">Clear Filters</button>
+  </div>
+</aside>
+
+
+        {/* Products Section */}
+        <section className="products">
+          <h2 className="section-title">Top Brands</h2>
+          <div className="brands">
+            {brands.map((brand) => (
+              <a href={`/brands/${brand.name.toLowerCase()}`} key={brand.id} className="brand-card">
+                <img src={brand.img} alt={brand.name} className="brand-image" />
+                <p className="brand-name">{brand.name}</p>
+              </a>
+            ))}
+          </div>
+          <div className="product-grid">
+  {products.map((product) => (
+    <div className="product-card" key={product.id}>
+      <img src={product.img} alt={product.name} className="product-image" />
+      <div className="product-info">
+        <p>{product.name}</p>
+        <p>{`Gen: ${product.gender} | Age: ${product.age}`}</p>
+        <p>{`Rs. ${product.price}`}</p>
+      </div>
+      <div className="product-actions">
+        <button className="add-to-cart">Add to Cart</button>
+        
+      </div>
+    </div>
+  ))}
+</div>
+
+          
+
+        </section>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-gradient-to-r from-gray-800 to-gray-900 text-white py-8">
-        <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Subscribe Section */}
-          <div>
-            <h4 className="font-bold">SIGN UP AND SAVE</h4>
-            <p>
-              Subscribe to get special offers, free giveaways, and
-              once-in-a-lifetime deals.
-            </p>
-            <div className="flex mt-2">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-2 rounded-l-lg border-none focus:ring-2 focus:ring-blue-500"
-              />
-              <button className="bg-blue-700 px-4 py-2 rounded-r-lg">Sub</button>
-            </div>
-          </div>
-
-          {/* Location Section */}
-          <div>
-            <h4 className="font-bold">LOCATION</h4>
-            <p>007, James Bond Street, London, England.</p>
-            <p>Mon-Sat: 10AM - 9PM</p>
-            <p>Sun: Closed</p>
-          </div>
-
-          {/* Useful Links Section */}
-          <div>
-            <h4 className="font-bold">USEFUL LINKS</h4>
-            <ul>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-blue-500">
-                  Privacy Policy
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-blue-500">
-                  Terms of Service
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-blue-500">
-                  Shipping & Returns
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };
 
-export default ProductDetailPage;
+export default App;
